@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return '<h1>hello world!!!!</h1>'##codes have changed but the server hasn't been restarted
+    return '<h1>hello world!!!!lllll</h1>'##codes have changed but the server hasn't been restarted
 
 @app.route('/user/<string:name>/')
 def get_user(name):
@@ -11,4 +11,4 @@ def get_user(name):
 
 
 if __name__ == '__main__':
-   app.run(debug=True)##run it with a debug mode on
+   app.run()##run it with a debug mode on
