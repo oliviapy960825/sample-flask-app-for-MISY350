@@ -1,0 +1,22 @@
+{% extends "home-base.html" %}
+{%block head%}
+{{super()}}
+<style>
+h1{
+  color:blue;
+}
+</style>
+
+{%endblock%}
+{%block title%}
+All songs
+{%endblock%}
+{%block page_content%}
+    <h1>this is the song list: </h1>
+    <ul>
+    {% for song in songs %}
+      <li>{{ song }}</li>
+    {% endfor %}
+    <img src="{{url_for('static',filename='img/google-img.gif')}}" alt=""><!--this path will update automatically-->
+    </ul>
+{% endblock %}
