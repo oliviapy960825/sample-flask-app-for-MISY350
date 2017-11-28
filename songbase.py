@@ -16,7 +16,7 @@ class Artist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
     about = db.Column(db.Text)
-    songs = db.relationship('Song', backref='artist')##back reference at the many side, unique in ORM
+    songs = db.relationship('Song', backref='artist')##back reference at the many side, unue in ORM
 
 class Song(db.Model):
     __tablename__ = 'songs'
@@ -43,10 +43,9 @@ def get_user(name):
     return render_template('user.html', user_name=name)
 
 
-# song-all.html adds song id to the edit button using a hidden input
-@app.route('/songs')
+@app.route('/songs')##every route needs a corresponding view function
 def show_all_songs():
-    songs = Song.query.all()
+    songs=Song.query.all()
     return render_template('song-all.html', songs=songs)
 
 @app.route('/artist/add', methods=['GET', 'POST'])
@@ -64,6 +63,36 @@ def add_artists():
         db.session.commit()
         return redirect(url_for('show_all_artists'))
 
+@app.route('/artist/edit/<int:id>', methods=['GET', 'POST'])
+def edit_artists(id):
+    artist=Artist.query.filter_by(id=id).first()
+    if request.method == 'GET':
+        return render_template('artist-edit.html',artist=artist)
+    if request.method == 'POST':
+        # get data from the form
+        artist.name = request.form['name']
+        artist.about = request.form['about']
+
+        db.session.commit()
+        return redirect(url_for('show_all_artists'))
+
+
+@app.route('/song/add', methods=['GET', 'POST'])
+def add_songs():
+    if request.method == 'GET':
+        return render_template('song-add.html')
+    if request.method == 'POST':
+        # get data from the form
+        name = request.form['name']
+        year = request.form['year']
+        lyrics = request.form['lyrics']
+        artist_name = request.form['artist_name']
+        artist= Artist.query.filter_by(name=artist_name).first()
+        # insert the data into the database
+        song = Song(name=name, year=year, lyrics=lyrics, artist=artist)
+        db.session.add(song)
+        db.session.commit()
+        return redirect(url_for('show_all_songs'))
 
 if __name__ == '__main__':
    app.run()##run it with a debug mode on

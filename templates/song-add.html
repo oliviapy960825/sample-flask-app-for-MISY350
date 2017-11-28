@@ -1,0 +1,19 @@
+{% extends "home-base.html" %}
+
+{%block title%}
+Add Songs
+{%endblock%}
+{% block page_content %}
+<h1>use the form to add a song</h1>
+<form action="/song/add" method="post">
+  <label>Song Name</label>
+  <input type="text" name="name" value=""><br><br>
+  <label>Song Year</label>
+  <input type="text" name="year" value=""><br><br>
+  <label>Lyrics</label>
+  <input type="text" name="lyrics" value=""><br><br>
+  <label>Artist Name</label>
+  <input type="text" name="artist_name" value=""><br><br>
+  <input type="submit" name="" value="Add Song">
+</form>
+{% endblock %}
