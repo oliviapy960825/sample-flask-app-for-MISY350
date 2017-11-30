@@ -9,11 +9,23 @@ Add Songs
   <label>Song Name</label>
   <input type="text" name="name" value=""><br><br>
   <label>Song Year</label>
-  <input type="text" name="year" value=""><br><br>
+  <select name="year">
+    {%for i in range(1950,2025)%}
+      {%if i==2017%}
+        <option selected="selected">{{i}}</option>
+      {%else%}
+        <option>{{i}}</option>
+      {%endif%}
+    {%endfor%}
+  </select>
   <label>Lyrics</label>
   <input type="text" name="lyrics" value=""><br><br>
   <label>Artist Name</label>
-  <input type="text" name="artist_name" value=""><br><br>
+  <select name="artist_name">
+    {%for artist in artists%}
+      <option>{{artist.name}}</option>
+    {%endfor%}
+  </select>
   <input type="submit" name="" value="Add Song">
 </form>
 {% endblock %}

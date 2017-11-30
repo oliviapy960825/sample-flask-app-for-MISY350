@@ -1,0 +1,26 @@
+{% extends "home-base.html" %}
+
+{%block title%}
+Delete Artists
+{%endblock%}
+{% block page_content %}
+<h1>use the form to delete an artist</h1>
+<form action="/artist/delete/{{artist.id}}" method="post">
+  <input type="text" name="name" value="{{artist.name}}" readonly="True"><br><br>
+  <input type="text" name="about" value="{{artist.about}}" readonly="True"><br><br>
+  <input type="submit" name="" value="Delete Artist" id="delete_btn">
+</form>
+{% endblock %}
+
+{% block scripts%}
+  {{super()}}
+  <script>
+  $(document).ready(function () {
+    $('#delete_btn').click(function () {
+      if (! confirm('All related songs will be deleted too!! Are you sure?')) {
+        return false;
+      }
+    })
+  });
+  </script>
+{% endblock%}

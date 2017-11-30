@@ -9,5 +9,9 @@
   <body>
     {% block page_content %}
     {% endblock %}
+    {% block scripts%}
+  <!-- jQuery full version first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+  {% endblock%}
   </body>
 </html>
